@@ -11,7 +11,7 @@ public class Main {
         Product p2=new Product(2L, "Le due torri. Il Signore degli anelli", "Books", 37.50);
         Product p3=new Product(3L, "Il ritorno del re. Il Signore degli anelli", "Books", 41.50);
         Product p4=new Product(4L, "Trilogia Signore degli anelli & Lo Hobbit", "Books", 120.0);
-        Product p5=new Product(5L, "Scarpe-Jordan", "Boys", 15.0);
+        Product p5=new Product(5L, "T-Short", "Baby", 15.0);
         Product p6=new Product(6L, "Harry Potter e la pietra Filosofale", "Movie", 21.70);
         Product p7=new Product(7L, "Harry Potter e la camera dei Segreti", "Movie" , 18.50);
         Product p8=new Product(8L, "Felpa-Vans","Boys", 80.0);
@@ -56,13 +56,23 @@ public class Main {
             System.out.println(p.getName() + " - " + p.getPrice());
         }
 
-       List<Order> orderedList= ordersList.stream().filter(order -> order.getProducts().stream().anyMatch(product -> product.getCategory("B"));
-        for (Order order : orderedList) {
-            System.out.println(orderedList);
+       List<Order> orderedList= ordersList.stream().filter(order -> order.getProducts().stream().anyMatch(product -> product.getCategory().equalsIgnoreCase("Baby"))).toList();
 
+        System.out.println("-----------Esercizio 2: Ordini con prodotti categoria 'Baby' ------------");
+        for (Order order : orderedList) {
+            System.out.println(order);
         }
 
+        List<Product> productsboys = products.stream()
+                .filter(product -> product.getCategory().equalsIgnoreCase("Boys"))
+                .map(product -> {
+                    product.setPrice(product.getPrice() * 0.9);
+                    return product;
+                })
+                .toList();
 
+        System.out.println("------------- Esercizio 3: Ordini con prodotti categoria 'Boys'------------");
+        System.out.println(productsboys);
 
 
     }
